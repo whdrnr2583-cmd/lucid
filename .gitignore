@@ -1,0 +1,28 @@
+# secrets
+*키.txt
+*token*.txt
+*.token
+*.pem
+*.key
+secrets/
+.npmrc
+.env
+.env.*
+
+# private workspace
+private/
+_private/
+*.private.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
