@@ -31,6 +31,22 @@ Claude Code's memory system (`MEMORY.md` + topic files) is great for project con
 
 claudelab intentionally avoids automation (hooks) to keep audit inflation in check. **Trade-off explicit, not accidental**.
 
+## Where this sits next to Anthropic's "Dreaming"
+
+In May 2026, Anthropic shipped **Dreaming** — a managed feature that, between sessions, reviews an agent's past sessions and memory, prunes stale notes, merges duplicates, resolves contradictions, and writes structured playbooks for future runs.
+
+We built claudelab without knowing Dreaming existed. Discovering it was a useful gut-check: the problem is real enough that Anthropic productized it. The two solve the same problem from opposite ends:
+
+| | Anthropic Dreaming | claudelab |
+|---|---|---|
+| Memory consolidation | automatic, between sessions | manual, explicitly gated |
+| Where it runs | managed / hosted | your local files, your repo |
+| Recurring-mistake surfacing | learned, implicit | `REJECTED.md` — explicit reason + reversal trigger |
+| Stops over-documentation | not a stated goal | audit inflation cap is the core constraint |
+| Auditable | yes (plain-text playbooks) | yes (plain-text, in your git) |
+
+Dreaming optimizes for *scale and autonomy*. claudelab optimizes for *a human staying in the loop without drowning in audit overhead*. If you run managed agents, use Dreaming. If you want a transparent, self-hosted, manually-gated workbench you fully control, claudelab is that — and the two aren't mutually exclusive.
+
 ## Quick start (5 minutes)
 
 ```bash
