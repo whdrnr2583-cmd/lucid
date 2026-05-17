@@ -1,6 +1,6 @@
 # Anthropic alignment research survey — 1 paper deep-read
 
-> claudelab round / Trigger: meta-cognition about Claude's training/alignment, applied to the user's own multi-agent setup
+> Lucid round / Trigger: meta-cognition about Claude's training/alignment, applied to the user's own multi-agent setup
 
 ## 8 most recent posts (alignment.anthropic.com)
 

@@ -1,6 +1,6 @@
 # `<fictional>` tag identity check
 
-> First claudelab round / Trigger: user asked what `<fictional>` means after seeing an angle-bracket placeholder in their docs.
+> First Lucid round / Trigger: user asked what `<fictional>` means after seeing an angle-bracket placeholder in their docs.
 
 ## Question
 
@@ -27,7 +27,7 @@ Is `<fictional>` a standard tag? An official wrapper used in Anthropic / Claude 
 |---|---|---|
 | Total | 5-7K / $0.20 | ~6.5K |
 
-First application of the claudelab rule — within estimate, terminated cleanly. Memory promotion not pursued (the check itself is sufficient evidence; doc improvements are a separate workstream).
+First application of the Lucid rule — within estimate, terminated cleanly. Memory promotion not pursued (the check itself is sufficient evidence; doc improvements are a separate workstream).
 
 ## Follow-up candidates (deferred)
 

@@ -1,4 +1,4 @@
-# claudelab Rejected Candidates Archive
+# Lucid Rejected Candidates Archive
 
 > Prevents re-proposal. Every rejected candidate: rejection date + reason + reversal trigger.
 

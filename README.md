@@ -1,4 +1,4 @@
-# claudelab
+# Lucid
 
 > A self-evolving Claude Code harness with **audit inflation cap**, **REJECTED archive**, and **closed-loop self-audit** — keep your meta-experiments out of your real projects.
 
@@ -10,7 +10,7 @@ Claude Code's memory system (`MEMORY.md` + topic files) is great for project con
 2. **Project pollution** — meta-experiments ("let me test if this MCP works") leak into your real project's commit history and `_workspace/`.
 3. **Rule drift** — you write a governance rule and bypass it the next day with "this time is different."
 
-`claudelab` is a workbench pattern + tooling that solves these three:
+**Lucid** is a workbench pattern + tooling that solves these three:
 
 - **Track separation** — your real projects, your meta-experiments, and your market-research drafts each follow different governance.
 - **Audit inflation cap** — explicit per-session limit on new memory files. Forces you to stop documenting and start building.
@@ -19,7 +19,7 @@ Claude Code's memory system (`MEMORY.md` + topic files) is great for project con
 
 ## What's unique vs alternatives
 
-| Feature | Self-evolving Obsidian + hooks | `everything-claude-code` | **claudelab** |
+| Feature | Self-evolving Obsidian + hooks | `everything-claude-code` | **Lucid** |
 |---|---|---|---|
 | Memory layer | ✓ | ✓ | ✓ |
 | Auto-evolving | ✓ (hooks) | ✓ | **Manual gate** (intentional) |
@@ -29,15 +29,15 @@ Claude Code's memory system (`MEMORY.md` + topic files) is great for project con
 | Track-separated governance | partial | ✗ | **✓** |
 | Workbench pattern (lab/) | ✗ | ✗ | **✓** |
 
-claudelab intentionally avoids automation (hooks) to keep audit inflation in check. **Trade-off explicit, not accidental**.
+Lucid intentionally avoids automation (hooks) to keep audit inflation in check. **Trade-off explicit, not accidental**.
 
 ## Where this sits next to Anthropic's "Dreaming"
 
 In May 2026, Anthropic shipped **Dreaming** — a managed feature that, between sessions, reviews an agent's past sessions and memory, prunes stale notes, merges duplicates, resolves contradictions, and writes structured playbooks for future runs.
 
-We built claudelab without knowing Dreaming existed. Discovering it was a useful gut-check: the problem is real enough that Anthropic productized it. The two solve the same problem from opposite ends:
+We built Lucid without knowing Dreaming existed. Discovering it was a useful gut-check: the problem is real enough that Anthropic productized it. The two solve the same problem from opposite ends:
 
-| | Anthropic Dreaming | claudelab |
+| | Anthropic Dreaming | Lucid |
 |---|---|---|
 | Memory consolidation | automatic, between sessions | manual, explicitly gated |
 | Where it runs | managed / hosted | your local files, your repo |
@@ -45,14 +45,14 @@ We built claudelab without knowing Dreaming existed. Discovering it was a useful
 | Stops over-documentation | not a stated goal | audit inflation cap is the core constraint |
 | Auditable | yes (plain-text playbooks) | yes (plain-text, in your git) |
 
-Dreaming optimizes for *scale and autonomy*. claudelab optimizes for *a human staying in the loop without drowning in audit overhead*. If you run managed agents, use Dreaming. If you want a transparent, self-hosted, manually-gated workbench you fully control, claudelab is that — and the two aren't mutually exclusive.
+Dreaming optimizes for *scale and autonomy*. Lucid optimizes for *a human staying in the loop without drowning in audit overhead*. If you run managed agents, use Dreaming. If you want a transparent, self-hosted, manually-gated workbench you fully control, Lucid is that — and the two aren't mutually exclusive.
 
 ## Quick start (5 minutes)
 
 ```bash
 # 1. clone
-git clone https://github.com/<your-github>/claudelab.git ~/claudelab
-cd ~/claudelab
+git clone https://github.com/<your-github>/lucid.git ~/lucid
+cd ~/lucid
 
 # 2. find your Claude Code memory dir
 # Claude Code stores memory at ~/.claude/projects/<sanitized-cwd>/memory/
@@ -61,25 +61,25 @@ ls ~/.claude/projects/
 
 # 3. copy the rule template into your memory dir
 export CLAUDE_MEMORY_DIR=~/.claude/projects/<your-sanitized-cwd>/memory
-cp templates/MEMORY_RULE.md $CLAUDE_MEMORY_DIR/feedback_claudelab.md
+cp templates/MEMORY_RULE.md $CLAUDE_MEMORY_DIR/feedback_lucid.md
 
 # 4. set up your workbench
-mkdir -p ~/claudelab/{tools,case-studies}
-cp tools/memory_health_check.py ~/claudelab/tools/
-cp templates/REJECTED.md ~/claudelab/REJECTED.md
+mkdir -p ~/lucid/{tools,case-studies}
+cp tools/memory_health_check.py ~/lucid/tools/
+cp templates/REJECTED.md ~/lucid/REJECTED.md
 
 # 5. set up the slash command (edit paths inside first)
-cp templates/slash_command.md ~/.claude/commands/claudelab.md
-$EDITOR ~/.claude/commands/claudelab.md  # replace path placeholders
+cp templates/slash_command.md ~/.claude/commands/lucid.md
+$EDITOR ~/.claude/commands/lucid.md  # replace path placeholders
 
 # 6. run first health check
-CLAUDE_MEMORY_DIR=$CLAUDE_MEMORY_DIR python3 ~/claudelab/tools/memory_health_check.py
+CLAUDE_MEMORY_DIR=$CLAUDE_MEMORY_DIR python3 ~/lucid/tools/memory_health_check.py
 ```
 
 Then in Claude Code:
 
 ```
-/claudelab
+/lucid
 ```
 
 The agent reads your rules, lists current lab rounds, and proposes 2-4 candidates (with token estimates) for your next meta-experiment.
@@ -89,8 +89,8 @@ The agent reads your rules, lists current lab rounds, and proposes 2-4 candidate
 ### 5 layers
 
 1. **Memory** (`MEMORY.md` + `feedback_*.md` / `project_*.md` / `reference_*.md`) — your rules and project state
-2. **Slash command** (`/claudelab`) — entry point, auto-loads layers 1+3+4
-3. **Lab folder** (`~/claudelab/<round-slug>/README.md`) — per-round experiment archive
+2. **Slash command** (`/lucid`) — entry point, auto-loads layers 1+3+4
+3. **Lab folder** (`~/lucid/<round-slug>/README.md`) — per-round experiment archive
 4. **REJECTED.md** — rejected candidates with reason + reversal trigger
 5. **health_check.py** — broken cross-ref / orphan / duplicate / LEGACY auto-detect
 
@@ -107,10 +107,10 @@ Every lab round candidate must include token estimate (input/output/$). Real-wor
 Three default tracks, each with different rules:
 
 - `your-projects/` — strict (no auto-commit, PMF gate, time cap)
-- `~/claudelab/` — workbench (audit cap, REJECTED archive, lab-only churn)
-- `~/claudelab/market-leads/` — market evidence archive (no immediate execution, criterion cross-check)
+- `~/lucid/` — workbench (audit cap, REJECTED archive, lab-only churn)
+- `~/lucid/market-leads/` — market evidence archive (no immediate execution, criterion cross-check)
 
-You define your own tracks in `feedback_claudelab.md`.
+You define your own tracks in `feedback_lucid.md`.
 
 ## Case studies
 
@@ -137,12 +137,12 @@ Total: 8 rounds across one session, ~$3.80 USD, zero impact on real project comm
 - Rules drift faster than humans notice
 - "Sometimes" exceptions slip in without justification
 
-claudelab keeps memory creation **manually gated** with explicit rules for bypass. See `templates/REJECTED.md` for the formal rejection of hooks-based automation.
+Lucid keeps memory creation **manually gated** with explicit rules for bypass. See `templates/REJECTED.md` for the formal rejection of hooks-based automation.
 
 ## Repo structure
 
 ```
-claudelab/
+lucid/
 ├── README.md                    ← you are here
 ├── LICENSE                      ← MIT
 ├── templates/

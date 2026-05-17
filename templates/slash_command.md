@@ -1,13 +1,13 @@
-# claudelab workbench entry
+# Lucid workbench entry
 
-> This slash command lets the agent proactively propose meta-experiments and archive selected ones in `~/<your-workspace>/claudelab/<topic-slug>/`.
+> This slash command lets the agent proactively propose meta-experiments and archive selected ones in `~/<your-workspace>/lucid/<topic-slug>/`.
 
 ## Auto-loaded files
 
 ```
-@~/.claude/projects/<your-sanitized-cwd>/memory/feedback_claudelab_experiment_folder.md
-@~/<your-workspace>/claudelab/README.md
-@~/<your-workspace>/claudelab/REJECTED.md
+@~/.claude/projects/<your-sanitized-cwd>/memory/feedback_lucid.md
+@~/<your-workspace>/lucid/README.md
+@~/<your-workspace>/lucid/REJECTED.md
 ```
 
 (Paths above are placeholders. Replace `<your-sanitized-cwd>` and `<your-workspace>` with actual values when installing.)
@@ -17,7 +17,7 @@
 ### 1. Workbench state check
 
 ```bash
-ls -1 ~/<your-workspace>/claudelab/ 2>/dev/null
+ls -1 ~/<your-workspace>/lucid/ 2>/dev/null
 ```
 
 Identify in-progress (README in progress) vs completed (final README + conclusion) rounds. If there's an in-progress round, notify the user first ("there's an open round X — continue or start new?").
@@ -25,7 +25,7 @@ Identify in-progress (README in progress) vs completed (final README + conclusio
 **Memory health check recommended cadence**: every 5-10 rounds or on user request:
 
 ```bash
-python3 ~/<your-workspace>/claudelab/tools/memory_health_check.py
+python3 ~/<your-workspace>/lucid/tools/memory_health_check.py
 ```
 
 No automatic trigger (Hooks-based automation is in REJECTED.md per the audit-inflation-automation-risk rule). Compare against current round count and notify the user if cadence threshold is hit.
@@ -48,7 +48,7 @@ Format for each candidate:
 - **Goal**: ...
 - **Method**: ...
 - **Estimated**: input ~X-YK / output ~A-BK / total ~MK / **$N.NN** (Opus 4.7)
-- **Output**: `claudelab/<slug>/README.md`
+- **Output**: `lucid/<slug>/README.md`
 - **Value**: ... (state why this stays out of real projects if applicable)
 ```
 
@@ -62,8 +62,8 @@ After all candidates, **give one honest recommendation** with reasoning. If some
 ### 5. On user selection — execute
 
 ```bash
-mkdir -p ~/<your-workspace>/claudelab/<topic-slug>
-cd ~/<your-workspace>/claudelab/<topic-slug>
+mkdir -p ~/<your-workspace>/lucid/<topic-slug>
+cd ~/<your-workspace>/lucid/<topic-slug>
 ```
 
 Do the work. On completion, write `README.md` covering: goal, method, conclusion, token measurement vs estimate, memory-promotion decision.
@@ -72,16 +72,16 @@ Promote valuable findings to memory (reference or feedback type) **only with exp
 
 ## Self-discipline (Claude reading this)
 
-- **Real projects don't get touched**. claudelab outputs must go through PR-style movement, never edited in-project directly.
+- **Real projects don't get touched**. Lucid outputs must go through PR-style movement, never edited in-project directly.
 - **Time budget**: respect your user's weekly cap (default: ~10h). Include time estimate alongside token estimate when relevant.
-- **No new-project launches** via claudelab. Candidates are fragments / experiments / market archives, never "launch this product."
+- **No new-project launches** via Lucid. Candidates are fragments / experiments / market archives, never "launch this product."
 - **Token estimate is mandatory**. If unsure, lower-upper bounds both.
 - **Don't push** — user declines → immediate return to real work, no re-pitching the rejected candidate in the same round.
 - **Cap candidates at 2-4** per round. 5+ overwhelms the user.
 
 ## Token estimate quick reference
 
-See `claudelab/README.md` for the full calibrated table. Summary:
+See `lucid/README.md` for the full calibrated table. Summary:
 
 | Category | Total | $ (Opus 4.7) |
 |---|---|---|
@@ -94,7 +94,7 @@ See `claudelab/README.md` for the full calibrated table. Summary:
 
 ## Trigger keywords (user utterances likely to invoke this)
 
-- "/claudelab" or "claudelab에서 뭐 해볼까"
+- "/lucid" or "lucid에서 뭐 해볼까"
 - "anything you want to try?" / "what should we do in the lab?"
 - "I found a definite market — what now?" → branches into `market-leads/`
 
@@ -112,7 +112,7 @@ See `claudelab/README.md` for the full calibrated table. Summary:
 
 For each finished round:
 
-- [ ] `claudelab/<slug>/README.md` written
+- [ ] `lucid/<slug>/README.md` written
 - [ ] Token actual vs estimate compared (one line, rule verification)
 - [ ] Memory promotion decision stated (Yes / No + reason)
 - [ ] Real-project impact noted (if any, archive a PR-style migration candidate)
