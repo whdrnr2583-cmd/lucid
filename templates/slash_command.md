@@ -47,7 +47,7 @@ Format for each candidate:
 
 - **Goal**: ...
 - **Method**: ...
-- **Estimated**: input ~X-YK / output ~A-BK / total ~MK / **$N.NN** (Opus 4.7)
+- **Estimated**: input ~X-YK / output ~A-BK / total ~MK / **N.NN USD** (Opus 4.7)
 - **Output**: `lucid/<slug>/README.md`
 - **Value**: ... (state why this stays out of real projects if applicable)
 ```
@@ -83,14 +83,16 @@ Promote valuable findings to memory (reference or feedback type) **only with exp
 
 See `lucid/README.md` for the full calibrated table. Summary:
 
-| Category | Total | $ (Opus 4.7) |
+| Category | Total | USD (Opus 4.7) |
 |---|---|---|
-| Simple curiosity (1-2 fetches) | ~10-20K | ~$0.20-0.50 |
-| Single code experiment | ~20-40K | ~$0.60-1.20 |
-| Skill invocation + analysis | ~30-50K | ~$0.85-1.50 |
-| Memory audit + matrix | ~20-30K | ~$0.50-0.80 |
-| Hypothesis verification (multi-step) | ~40-100K | ~$1.50-3.00 |
-| Large experiment (multi-agent) | 120K+ | $3.50+ |
+| Simple curiosity (1-2 fetches) | ~10-20K | ~0.20-0.50 |
+| Single code experiment | ~20-40K | ~0.60-1.20 |
+| Skill invocation + analysis | ~30-50K | ~0.85-1.50 |
+| Memory audit + matrix | ~20-30K | ~0.50-0.80 |
+| Hypothesis verification (multi-step) | ~40-100K | ~1.50-3.00 |
+| Large experiment (multi-agent) | 120K+ | 3.50+ |
+
+> Amounts are written without a `$` prefix on purpose: in a skill/command file, `$` followed by a digit (`$0`, `$1`, …) is consumed as a positional-argument placeholder and would corrupt the value when the command is invoked with arguments.
 
 ## Trigger keywords (user utterances likely to invoke this)
 
